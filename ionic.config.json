@@ -1,5 +1,7 @@
 {
   "name": "appTickets",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

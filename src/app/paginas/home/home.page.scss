@@ -1,0 +1,60 @@
+.clTitulo{
+
+  border-radius: 10px;
+  background: #9b59b6;
+  color: #fff;
+}
+
+.encabezadoSecundarioBusqueda{
+
+  background: #ecf0f1;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+ // padding-left: 10px;
+  // --background: #ffffff;
+  // --color: #34495e;
+}
+
+
+.imagenCon{
+  text-decoration: none;
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  padding: 25px;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+}
+
+.colorSegmento{
+  --background: #3498db;
+}
+
+.colorH2{
+  color: #34495e;
+}
+
+.colorP{
+  color: #34495e;
+}
+
+.item-carta{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-lineal{
+  display: flex;
+
+}
+
+.calendario{
+  margin-right: 4px;
+}
+
+.lbEstado{
+  font-size: 0.8rem;
+}

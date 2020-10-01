@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar class="colorToolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ticket # : {{ tk.ticket }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+  <ion-list>
+
+  <ion-item *ngFor="let t of tickets">
+    <!-- <ion-label>
+      <div class="item-lineal">
+        <ion-icon class="calendario" name="calendar-outline"></ion-icon>
+        <p class="colorP"><strong>{{ t.fechaIni }}</strong></p>
+      </div>
+
+      <div class="item-carta">  
+        <ion-label><strong>Ticket :</strong>{{ t.ticket }}</ion-label>
+        <ion-label class="lbEstado" color="primary">{{ t.estado }}</ion-label>
+      </div>
+     
+      <p class="colorP"><strong>Asignado a :</strong> {{ t.nombreUsuario }}</p>
+      <p class="colorP"><strong>Cliente :</strong>{{ t.nombre }}</p>
+      <p class="colorP">{{ t.descripcion }}</p>
+         
+    </ion-label>   -->
+    </ion-item>   
+
+</ion-list>
+
+</ion-content>

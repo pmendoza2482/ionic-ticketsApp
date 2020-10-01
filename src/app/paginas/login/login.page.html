@@ -1,0 +1,42 @@
+<ion-content>
+
+    <!-- <div class="ion-text-center" style="margin-top: 26%; margin-bottom: 5px;">
+        <img src="/assets/iconoAutenticacion.PNG">
+    </div> -->
+
+    <img src="/assets/waves.PNG" 
+    alt=""/>
+
+    <div class="contenedorLabel">
+        <ion-label class="lbBienvenido ion-text-center">Bienvenido!</ion-label>
+        <ion-label class="lbIniciar">inicia sesión para continuar</ion-label>    
+   </div>
+
+    <ion-list class="line-input">
+        <ion-item>
+          <ion-input type="text" #usuario required 
+                     placeholder="Ingresa tu usuario."></ion-input>
+        </ion-item>
+      
+        <ion-item style="margin-top: 12px; margin-bottom: 16px;">
+          <ion-input type="password" #password required
+                     placeholder="Ingresa tu contraseña."></ion-input>
+        </ion-item> 
+      </ion-list>
+
+      <div class="ion-text-center">
+          <ion-button style="--background: #3498db; --border-radius: 28px;"
+                      (click)="onLogin(usuario, password)">
+            Ingresar
+          </ion-button>
+        </div>
+
+
+
+</ion-content>
+
+<ion-footer class="ion-no-border ion-text-center">
+  <ion-toolbar color="light">
+    <ion-title size="small">Creative Digital 2020®</ion-title>
+  </ion-toolbar>
+</ion-footer>

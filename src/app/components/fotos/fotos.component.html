@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar class="colorToolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="regresar()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Ticket # : {{ tickets.ticket }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-slides pager="ios" class="slide-full">
+    <ion-slide>
+      <ion-card mode="ios">
+        <img *ngIf="!tickets.imagenDRW1" src="/assets/NoImagen.PNG" class="slide-image">
+        <img *ngIf="tickets.imagenDRW1" [src]="tickets.imagenDRW1" class="slide-image"> 
+        
+        <ion-card-header>
+          <ion-card-subtitle>Imagen 1</ion-card-subtitle>
+        </ion-card-header>
+
+        <div class="ion-text-center">
+          <ion-button style="--background: #3498db; --border-radius: 28px;"
+                      (click)="IrFotos(1)">
+            Subir Foto
+          </ion-button>
+          
+        </div>
+        
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card mode="ios">
+        <img *ngIf="!tickets.imagenDRW2" src="/assets/NoImagen.PNG" class="slide-image">
+        <img *ngIf="tickets.imagenDRW2" src="/assets/NoImagen.PNG" class="slide-image" class="slide-image">
+        <!-- <img *ngIf="tickets.ImagenDRW2" [src]="tickets.ImagenDRW2" class="slide-image"> -->
+
+        <ion-card-header>
+          <ion-card-subtitle>Imagen 2</ion-card-subtitle>
+        </ion-card-header>
+
+        <div class="ion-text-center">
+          <ion-button style="--background: #3498db; --border-radius: 28px;"
+                      (click)="IrFotos(2)">
+            Subir Foto
+          </ion-button>
+
+        </div>
+
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card mode="ios">
+        <img *ngIf="!tickets.imagenDRW3" src="/assets/NoImagen.PNG" class="slide-image">
+        <img *ngIf="tickets.imagenDRW3" [src]="tickets.imagenDRW3" class="slide-image"> 
+        
+        <ion-card-header>
+          <ion-card-subtitle>Imagen 3</ion-card-subtitle>
+        </ion-card-header>
+
+        <div class="ion-text-center">
+          <ion-button style="--background: #3498db; --border-radius: 28px;"
+                      (click)="IrFotos(3)">
+            Subir Foto
+          </ion-button>
+          
+        </div>
+
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>

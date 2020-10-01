@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar class="colorToolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="regresar()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Regresar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="listaMargen"></div>
+
+  <ion-list class="line-input">
+      <ion-label class="etiquetas">Código</ion-label>
+      <div class="item-content-generalInformacion">         
+          <ion-label>{{ clienteTicket.codigo }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Nombre</ion-label>
+      <div class="item-content-generalInformacion">
+          <ion-label>{{ clienteTicket.nombre }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Ip</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.iP }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Fecha</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.fecha }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Router</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.router }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Download</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.download }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Upload</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.upload }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">IP Publica</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.iPPublica }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Estatus</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.status }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Dirección</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.direccion }}</ion-label>
+      </div>
+   
+      <ion-label class="etiquetas">Teléfono 1</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.telefono1 }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Teléfono 2</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.telefono2 }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Teléfono 3</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.telefono3 }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Observaciones</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.observaciones }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Departamento</ion-label>
+      <div class="item-content-generalInformacion">       
+          <ion-label>{{ clienteTicket.departamento }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">Ciudad</ion-label>
+      <div class="item-content-generalInformacion">        
+          <ion-label>{{ clienteTicket.ciudad }}</ion-label>
+      </div>
+
+      <ion-label class="etiquetas">MAC</ion-label>
+      <div class="item-content-generalInformacion">       
+          <ion-label>{{ clienteTicket.mAC }}</ion-label>
+      </div>
+
+    </ion-list> 
+
+</ion-content>

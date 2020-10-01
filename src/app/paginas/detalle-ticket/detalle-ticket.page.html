@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar class="colorToolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ticket # : {{ tk.ticket }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="listaMargen"></div>
+
+    <ion-list class="line-input">
+      <ion-label class="etiquetas">Cliente</ion-label>
+        
+        <div class="item-content-cliente" (click)="IraInfoCliente(tk.cliente)">
+          <ion-label>{{ tk.nombre }}</ion-label>
+          <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+        </div>    
+         
+        <div class="item-content-estado">
+          <ion-label class="lbEstado">Estado : </ion-label>
+          <ion-select slot="end" (ionChange)="SeleccionoOpcion($event)" [(ngModel)]="tk.estado" class="cmbEstado" value="{{ tk.estado }}" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Select One">
+            <ion-select-option *ngFor="let e of estados" [value]="e.estado">{{ e.estado }}</ion-select-option>
+          </ion-select>
+        </div>
+
+        <ion-label class="etiquetas">Fecha de Inicio</ion-label>
+        <div class="item-content-generalInformacion">
+          <ion-label>{{ tk.fechaIni }}</ion-label>
+        </div>
+
+        <ion-label class="etiquetas">Tipo de Reclamo</ion-label>
+        <div class="item-content-generalInformacion">        
+          <ion-label>{{ tk.tipoReclamo }}</ion-label>
+        </div>
+
+        <ion-label class="etiquetas">Descripción</ion-label>
+        <div class="item-content-generalInformacion">        
+            <ion-label>{{ tk.descripcion }}</ion-label>
+        </div>
+
+        <ion-label class="etiquetas">Telefono 1</ion-label>
+        <div class="item-content-generalInformacion">        
+            <ion-label>{{ tk.telefono1 }}</ion-label>
+        </div>
+
+        <ion-label class="etiquetas">Telefono 2</ion-label>
+        <div class="item-content-generalInformacion">        
+            <ion-label>{{ tk.telefono2 }}</ion-label>
+        </div>
+
+        <div class="ion-text-center">
+          <ion-button style="--background: #3498db; --border-radius: 28px;"
+                      (click)="IrFotos()">
+            Fotos
+          </ion-button>
+        </div>
+
+      </ion-list> 
+
+</ion-content>

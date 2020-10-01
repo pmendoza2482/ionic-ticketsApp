@@ -24,3 +24,48 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.colorToolbar{
+    // --background: #3498db;
+    // --color: #fff;
+
+    --background: #3498db;
+    --color: #ffffff;
+}
+
+.listaMargen{
+  margin-top: 15px;
+}
+
+.mi-componente-css .modal-wrapper {
+  width: 100%;
+  height: 100%;  
+  position: absolute; 
+  display: block;  
+}
+
+.mi-accionAzul, .mi-accionAzul .sc-ion-action-sheet-md {
+  color: #3498db !important;
+}
+
+.mi-accionCerrar {
+  --button-background: #3498db !important;
+}
+
+.mi-accionCerrar, .mi-accionCerrar .sc-ion-action-sheet-md {
+  color: #fff !important;
+}
+
+.item-content-generalInformacion {
+  border: 1px solid #dedede;
+  border-radius: 12px;
+  margin-left: 7%;
+  margin-right: 7%;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+.etiquetas{
+  margin-left: 10%;
+}
+

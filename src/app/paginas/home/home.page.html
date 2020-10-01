@@ -1,0 +1,88 @@
+<ion-header [translucent]="true"  class="ion-no-border">
+  <ion-toolbar class="colorToolbar">
+    <ion-buttons slot="start">
+      <ion-button>
+          <ion-icon slot="icon-only" name="build"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-title>
+      Mis tickets       
+    </ion-title>
+  
+    <ion-chip slot="end" color="dark">
+      <ion-label>Pedro Mendoza</ion-label>
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-chip>
+  
+  </ion-toolbar>
+
+   <ion-segment scrollable value="ABIERTO" mode="md" class="colorSegmento" 
+                color="light" 
+               (ionChange)="SeleccionarOpcion($event)">
+
+    <ion-segment-button mode="md" value="Todos">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button mode="md" value="EN ESPERA">
+      <ion-label>En Espera</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button mode="md" value="ABIERTO">
+      <ion-label>Abiertos</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button mode="md" value="SIN ASIGNAR">
+      <ion-label>Sin Asignar</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button mode="md" value="CERRADO">
+      <ion-label text-capitalize>Cerrados</ion-label>
+    </ion-segment-button>
+
+  </ion-segment> 
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+
+  <!-- <ion-item *ngFor="let t of tickets" (click)="irADetalle(t)">  -->
+    <ion-item *ngFor="let t of tickets" (click)="IrDetalleTicket(t)">
+      <ion-label>
+        <div class="item-lineal">
+          <ion-icon class="calendario" name="calendar-outline"></ion-icon>
+          <p class="colorP"><strong>{{ t.fechaIni }}</strong></p>
+        </div>
+
+        <div class="item-carta">  
+          <ion-label><strong>Ticket :</strong>{{ t.ticket }}</ion-label>
+          <ion-label class="lbEstado" color="primary">{{ t.estado }}</ion-label>
+        </div>
+           <!-- <h2 class="colorH2"><strong>Ticket :</strong>{{ t.ticket }} </h2> -->
+        <p class="colorP"><strong>Asignado a :</strong> {{ t.nombreUsuario }}</p>
+        <p class="colorP"><strong>Cliente :</strong>{{ t.nombre }}</p>
+        <p class="colorP">{{ t.descripcion }}</p>
+           
+          <!-- <p><strong> Estado : </strong> {{ t.estado }} </p>  -->
+
+      </ion-label>  
+        <!-- <ion-badge *ngIf="t.listo" color="secondary" class="badgeMargen">Listo!</ion-badge> -->
+         <!-- <ion-badge [color]="colorEstado">{{ t.estado }}</ion-badge>  -->
+         <!-- <ion-label slot="end" color="warning">{{ t.estado }}</ion-label>  -->
+
+      </ion-item>   
+
+  </ion-list>
+    
+  <!-- <div *ngIf="tickets.length === 0" class="imagenCon"> -->
+  <!-- <div class="imagenCon">
+    <img src="/assets/tickets.png" />
+    <ion-label>No tienes tickets asignados.</ion-label>
+  </div> -->
+</ion-content>
