@@ -11,13 +11,13 @@
     </ion-title>
   
     <ion-chip slot="end" color="dark">
-      <ion-label>Pedro Mendoza</ion-label>
+      <ion-label>{{usuarioTickets }}</ion-label>
       <ion-icon name="person-outline"></ion-icon>
     </ion-chip>
   
   </ion-toolbar>
 
-   <ion-segment scrollable value="ABIERTO" mode="md" class="colorSegmento" 
+   <ion-segment scrollable value="Todos" mode="md" class="colorSegmento" 
                 color="light" 
                (ionChange)="SeleccionarOpcion($event)">
 
@@ -51,8 +51,6 @@
   </ion-refresher>
 
   <ion-list>
-
-  <!-- <ion-item *ngFor="let t of tickets" (click)="irADetalle(t)">  -->
     <ion-item *ngFor="let t of tickets" (click)="IrDetalleTicket(t)">
       <ion-label>
         <div class="item-lineal">
@@ -76,13 +74,16 @@
          <!-- <ion-badge [color]="colorEstado">{{ t.estado }}</ion-badge>  -->
          <!-- <ion-label slot="end" color="warning">{{ t.estado }}</ion-label>  -->
 
-      </ion-item>   
-
+    </ion-item>   
   </ion-list>
+
+  <ion-infinite-scroll [disabled] = "!habilitado" 
+                       threshold="150px" 
+                       (ionInfinite)="siguientes($event)">
+    <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+      loadingText="Cargando mas tickets...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
     
-  <!-- <div *ngIf="tickets.length === 0" class="imagenCon"> -->
-  <!-- <div class="imagenCon">
-    <img src="/assets/tickets.png" />
-    <ion-label>No tienes tickets asignados.</ion-label>
-  </div> -->
 </ion-content>

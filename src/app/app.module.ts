@@ -11,6 +11,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { Camera } from '@ionic-native/camera/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { SignaturePadModule } from 'angular2-signaturepad';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,16 +22,18 @@ import { FechasPersonalizadasPipe } from './pipes/fechas-personalizadas.pipe';
 import { HistoricoComponent } from './components/historico/historico.component';
 import { PipesTicketsModule } from './pipes-tickets/pipes-tickets.module';
 import { TicketDetalleComponent } from './components/ticket-detalle/ticket-detalle.component';
-
+import { AceptacionComponent } from './components/aceptacion/aceptacion.component';
+import { ObtenerAceptacionComponent } from './components/obtener-aceptacion/obtener-aceptacion.component';
 
 @NgModule({
-  declarations: [AppComponent, GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent, ImageSanitizerPipe, FechasPersonalizadasPipe],
-  entryComponents: [GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent],
+  declarations: [AppComponent, GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent, AceptacionComponent, ObtenerAceptacionComponent, ImageSanitizerPipe, FechasPersonalizadasPipe],
+  entryComponents: [GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent, AceptacionComponent, ObtenerAceptacionComponent],
   imports: [
     PipesTicketsModule,
     BrowserModule, 
     FormsModule,
     HttpClientModule,
+    SignaturePadModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(), 
     AppRoutingModule

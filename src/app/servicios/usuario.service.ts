@@ -20,14 +20,14 @@ export class UsuarioService {
     private storege: Storage,
     private navCtrl: NavController) { }
 
-    login(usuario: string, password: string){
+    async login(usuario: string, password: string){
 
       const data = { Login: usuario, Password: password };
 
       return new Promise(resolve => {
 
         this.http.post(`${ URL }Ticket/Autenticar`, data)
-          .subscribe(resp => {
+          .subscribe(async resp => {
 
             console.log(resp);
               
@@ -41,7 +41,7 @@ export class UsuarioService {
             }
             if(resp['data']){
   
-              this.guardarToken(resp['token']);
+              await this.guardarToken(resp['token']);
               resolve(true);
 
             }

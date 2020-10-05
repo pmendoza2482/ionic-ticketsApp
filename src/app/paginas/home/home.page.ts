@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MaeTickets } from 'src/app/modelos/MaeTickets.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TicketsService } from 'src/app/servicios/tickets.service';
@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { TicketDetalleComponent } from 'src/app/components/ticket-detalle/ticket-detalle.component';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { MensajeAdvertencia } from 'src/app/clasesComunes/validaciones';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +15,19 @@ import { MensajeAdvertencia } from 'src/app/clasesComunes/validaciones';
 })
 export class HomePage implements OnInit {
 
+ @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
+ habilitado = true;
  tickets: MaeTickets[] = [];
  ticketDet: MaeTickets = {};
  fechaHoy: Date = new Date('2020-08-25 00:10:15.423');
  usuarioTickets: string;
  tipoUsuario: string = 'Usuario   ';
 
- estadoFiltro: string = 'Abierto';
+ estadoFiltro: string = 'Todos';
  colorEstado = "warning";
+
+ 
 
   // tickets: MaeTickets[] = [
   //   {
@@ -78,8 +84,7 @@ export class HomePage implements OnInit {
   constructor(private state: ActivatedRoute,
     private route: Router,
     private ticketsService: TicketsService,
-    private modalCtrl: ModalController,
-    private usuarioService: UsuarioService) {}
+    private modalCtrl: ModalController) {}
 
     async ngOnInit() {
 
@@ -88,18 +93,37 @@ export class HomePage implements OnInit {
     console.log(this.usuarioTickets)
     console.log('Llama metodo al iniciar los tickets')
 
+    console.log('Esta habilitado? : ', this.habilitado)
     await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro);
+
+   // this.habilitado = true;
+    //await this.siguientes(this.usuarioTickets, this.estadoFiltro);
 
   }
 
-  async ObtenerTickets(usuario: string, estadoFiltro: string){
+  async ObtenerTickets(usuario: string, estadoFiltro: string, pull: boolean = false, event?){
 
-    (await this.ticketsService.obtenerTickets(usuario, estadoFiltro)).subscribe((tick)=> {
+    (await this.ticketsService.obtenerTicketsPaginado(usuario, estadoFiltro, pull))
+            .subscribe(tick => {
       
-      this.tickets = tick['data']
+     console.log('registros data : ', tick['data'].length)
 
-      console.log('Llama todos los tickets')
+     console.log(tick['data'])
+     this.tickets.push(...tick['data']);
+     
+      if(event){
 
+        event.target.complete();
+
+        if(tick['data'].length === 0){
+
+          console.log('data lengt = 0')
+        // event.target.disabled = true;
+          this.habilitado = false;
+          //event.target.complete();
+          return;
+        }
+      }  
     }, (errorObtenido) => {
 
       console.log(errorObtenido);
@@ -112,23 +136,35 @@ export class HomePage implements OnInit {
       }
       
     })
+
+  }
+
+  async siguientes(event){
+
+    console.log('entra en siguientes ...')
+
+    await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro, false, event);
   }
 
   async recargar(event){
 
-    await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro);
+    console.log('recargando')
+    
+    await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro, true, event);
 
-    event.target.complete();
-
+    this.habilitado = true;
+    this.tickets = [];
   }
 
   async SeleccionarOpcion(event){
 
-    console.log(event.detail.value);
+    this.habilitado = true;
+    this.tickets = [];
 
     this.estadoFiltro = event.detail.value;
 
     await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro);
+   // await this.siguientes(this.usuarioTickets, this.estadoFiltro);
   }
 
   async IrDetalleTicket(t: MaeTickets){
@@ -164,10 +200,15 @@ export class HomePage implements OnInit {
 
     modal.onDidDismiss().then(async () => {
 
-      await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro);
+      console.log('entra modal desmise', this.habilitado)
+      this.tickets = [];
+
+     // await this.siguientes(this.usuarioTickets, this.estadoFiltro);
+      await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro, true);
     });
 
     return await modal.present();
   }
 
+  
 }

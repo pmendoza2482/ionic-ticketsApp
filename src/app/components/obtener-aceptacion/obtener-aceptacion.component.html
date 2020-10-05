@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar class="colorToolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="regresar()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Ticket # : {{ tkt }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="colorContenido">
+  <!-- <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad> -->
+  <signature-pad #signatureCanvas [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+</ion-content>
+
+
+<ion-footer class="ion-no-border ion-text-center">
+  <ion-toolbar color="light">
+    <ion-button slot="start" shape="round" fill="outline" style="margin: 14px;"
+                (click)="LimpiarPad()">
+      Limpiar
+    </ion-button>
+
+    <ion-button slot="end" shape="round" style="--background: #3498db; margin: 14px;"
+                (click)="GuardarAceptacion()">
+      Guardar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

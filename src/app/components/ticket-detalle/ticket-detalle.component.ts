@@ -8,6 +8,7 @@ import { RequestTicket, MaeTickets } from 'src/app/modelos/MaeTickets.models';
 import { MensajeAdvertencia } from 'src/app/clasesComunes/validaciones';
 import { FotosComponent } from '../fotos/fotos.component';
 import { GeneralClienteComponent } from '../general-cliente/general-cliente.component';
+import { AceptacionComponent } from '../aceptacion/aceptacion.component';
 
 @Component({
   selector: 'app-ticket-detalle',
@@ -82,14 +83,21 @@ export class TicketDetalleComponent implements OnInit {
     cssClass: 'mi-componente-css'
  });
 
- modal.onDidDismiss().then(() => {
+  return await modal.present();
+}
 
-  // this.GenerarTotales();
+async IrAceptacion(){
+
+  let tkt = this.ticketRecibido.ticket;
+  
+  const modal = await this.modalCtrl.create({
+    component: AceptacionComponent,
+    componentProps: { tkt },
+    cssClass: 'mi-componente-css'
  });
 
- return await modal.present();
-
-  }
+  return await modal.present();
+}
 
   async SeleccionoOpcion(event){
 

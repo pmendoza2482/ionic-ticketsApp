@@ -5,7 +5,7 @@ import { TicketsService } from 'src/app/servicios/tickets.service';
 import { MaeTickets } from 'src/app/modelos/MaeTickets.models';
 import { MensajeAdvertencia } from 'src/app/clasesComunes/validaciones';
 
-declare var window: any;
+// declare var window: any;
 
 @Component({
   selector: 'app-fotos',
@@ -18,7 +18,7 @@ export class FotosComponent implements OnInit {
 
  // tempImagen: string[] = [];
 
-   tickets: MaeTickets = {};
+  tickets: MaeTickets = {};
 
   imagen24: string;
   
@@ -30,7 +30,6 @@ export class FotosComponent implements OnInit {
   async ngOnInit() {
 
     this.ObtenerImagenes();
-
   }
 
   async ObtenerImagenes(){
@@ -54,7 +53,7 @@ export class FotosComponent implements OnInit {
     this.modalCtr.dismiss();
   }
 
-  camara(numeroFoto: number){
+  async camara(numeroFoto: number){
 
     const options: CameraOptions = {
       quality: 100,
@@ -68,7 +67,7 @@ export class FotosComponent implements OnInit {
     this.procesarImagen(options, numeroFoto); 
   }
 
-  libreria(numeroFoto: number){
+  async libreria(numeroFoto: number){
 
     const options: CameraOptions = {
       quality: 100,
@@ -82,22 +81,35 @@ export class FotosComponent implements OnInit {
     this.procesarImagen(options, numeroFoto);
   }
 
-  procesarImagen(options: CameraOptions, numeroFoto: number){
+  async procesarImagen(options: CameraOptions, numeroFoto: number){
 
-    this.camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(options).then(async (imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
       // let base64Image = 'data:image/jpeg;base64,' + imageData;
  
       //const img = window.Ionic.WebView.convertFileSrc(imageData);
  
-      this.ticketsService.subirImagen(imageData, this.tkt, numeroFoto);
+      const valido = await this.ticketsService.subirImagen(imageData, this.tkt, numeroFoto);
 
-      this.ObtenerImagenes();
+      if(valido){
+
+        //loading.dismiss();
+        MensajeAdvertencia('Aceptación guardada.');
+        this.ObtenerImagenes();
+  
+      }else{
+  
+        //loading.dismiss();
+       // MensajeAdvertencia('Ocurrio un error : ');
+      }
+
+      
      // this.tempImagen.push(img);
 
      }, (err) => {
       
+      console.log(err);
       MensajeAdvertencia('Ocurrio un error al cargar la foto.' + err);
      });
 

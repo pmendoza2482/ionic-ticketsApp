@@ -53,14 +53,21 @@
             <ion-label>{{ ticketRecibido.telefono2 }}</ion-label>
         </div>
 
-        <div class="ion-text-center">
-          <ion-button style="--background: #3498db; --border-radius: 28px;"
-                      (click)="IrFotos()">
-            Fotos
-          </ion-button>
-        </div>
-
       </ion-list> 
 
 </ion-content>
+
+<ion-footer class="ion-no-border ion-text-center">
+  <ion-toolbar color="light">
+    <ion-button slot="start" shape="round" fill="outline" style="margin: 14px;"
+                (click)="IrFotos()">
+      Fotos
+    </ion-button>
+
+    <ion-button slot="end" shape="round" style="--background: #3498db; margin: 14px;"
+    (click)="IrAceptacion()">
+       Aceptación
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
 

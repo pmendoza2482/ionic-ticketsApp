@@ -16,16 +16,51 @@ const URL = environment.url;
 export class TicketsService {
 
   token: string = null;
+  ticketPagina = 0;
+
+  estadoActual = '';
+ // estadoPagina = 0;
 
   constructor(public http: HttpClient,
     private storege: Storage,
     private fileTransfer: FileTransfer) { }
+
+  async obtenerTicketsPaginado(usuario: string, estadoFiltro: string, pull: boolean = false){
+
+    if(pull){
+      this.ticketPagina = 0;
+    }
+
+    console.log(this.estadoActual)
+
+    if(this.estadoActual === estadoFiltro){
+
+      this.ticketPagina ++;
+    }else{
+
+      this.ticketPagina = 1;
+      this.estadoActual = estadoFiltro;
+    }
+
+    console.log(this.ticketPagina)
+
+    await this.cargarToken();
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return this.http.get<ResponseTickets>(URL + `Ticket/MostrarTicketsPaginadoPorUsuario?usuario=${usuario}&estado=${estadoFiltro}&pageNumber=${this.ticketPagina}&pageSize=10`, { headers });
+    //return this.http.get<ResponseTickets>(URL + `Ticket/MostrarTicketsPorUsuario?usuario=${usuario}&estado=${estadoFiltro}`, { headers });
+  }
 
   async obtenerTickets(usuario: string, estadoFiltro: string){
 
     console.log(this.token)
 
     await this.cargarToken();
+
+    console.log(this.token)
 
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.token
@@ -74,6 +109,7 @@ export class TicketsService {
           resolve(false);
         }
       });
+
     });
   }
 
@@ -88,11 +124,19 @@ export class TicketsService {
 
     const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
-    fileTransfer.upload(img, URL + `Ticket/SalvarImagen?ticket=${ticket}&numeroImg=${numeroImagen}`, options)
-    .then(data => {
-      //console.log(data)
-    }).catch(err => {
-      MensajeAdvertencia('Ocurrio un error:' + err);
+    return new Promise (resolve => {
+
+      fileTransfer.upload(img, URL + `Ticket/SalvarImagen?ticket=${ticket}&numeroImg=${numeroImagen}`, options)
+      .then(data => {
+
+        resolve(true);
+        console.log(data)
+      }).catch(err => {
+
+        resolve(false);
+        MensajeAdvertencia('Ocurrio un error:' + err);
+      });
+
     });
   }
 
