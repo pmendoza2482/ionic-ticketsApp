@@ -24,10 +24,11 @@ import { PipesTicketsModule } from './pipes-tickets/pipes-tickets.module';
 import { TicketDetalleComponent } from './components/ticket-detalle/ticket-detalle.component';
 import { AceptacionComponent } from './components/aceptacion/aceptacion.component';
 import { ObtenerAceptacionComponent } from './components/obtener-aceptacion/obtener-aceptacion.component';
+import { GuardarDetalleTicketComponent } from './components/guardar-detalle-ticket/guardar-detalle-ticket.component';
 
 @NgModule({
-  declarations: [AppComponent, GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent, AceptacionComponent, ObtenerAceptacionComponent, ImageSanitizerPipe, FechasPersonalizadasPipe],
-  entryComponents: [GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent, AceptacionComponent, ObtenerAceptacionComponent],
+  declarations: [AppComponent, GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent, AceptacionComponent, ObtenerAceptacionComponent, GuardarDetalleTicketComponent, ImageSanitizerPipe, FechasPersonalizadasPipe],
+  entryComponents: [GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent, AceptacionComponent, ObtenerAceptacionComponent, GuardarDetalleTicketComponent],
   imports: [
     PipesTicketsModule,
     BrowserModule, 

@@ -21,12 +21,20 @@
           <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
         </div>    
          
-        <div class="item-content-estado">
+         <!-- <div class="item-content-estado">
           <ion-label class="lbEstado">Estado : </ion-label>
           <ion-select slot="end" (ionChange)="SeleccionoOpcion($event)" [(ngModel)]="ticketRecibido.estado" class="cmbEstado" value="{{ ticketRecibido.estado }}" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Select One">
             <ion-select-option *ngFor="let e of estados" [value]="e.estado">{{ e.estado }}</ion-select-option>
           </ion-select>
-        </div>
+        </div>  -->
+
+         <div class="item-content-generalInformacion">
+          <ion-label>Estado : </ion-label>
+          <ion-button slot="end"  fill="outline"
+                      (click)="LlamarModalDetalle()">
+                      {{ ticketRecibido.estado }}
+          </ion-button>
+        </div> 
 
         <ion-label class="etiquetas">Fecha de Inicio</ion-label>
         <div class="item-content-generalInformacion">
@@ -59,12 +67,12 @@
 
 <ion-footer class="ion-no-border ion-text-center">
   <ion-toolbar color="light">
-    <ion-button slot="start" shape="round" fill="outline" style="margin: 14px;"
+    <ion-button slot="start" shape="round" fill="outline" style="margin-left: 14px;"
                 (click)="IrFotos()">
       Fotos
     </ion-button>
 
-    <ion-button slot="end" shape="round" style="--background: #3498db; margin: 14px;"
+    <ion-button slot="end" shape="round" style="--background: #3498db; margin-right: 14px;"
     (click)="IrAceptacion()">
        Aceptación
     </ion-button>

@@ -21,13 +21,15 @@ export class HomePage implements OnInit {
  tickets: MaeTickets[] = [];
  ticketDet: MaeTickets = {};
  fechaHoy: Date = new Date('2020-08-25 00:10:15.423');
+// usuarioTickets: string;
  usuarioTickets: string;
- tipoUsuario: string = 'Usuario   ';
+ //tipoUsuario: string = 'Usuario';
+ tipoUsuario: string;
 
- estadoFiltro: string = 'Todos';
+ estadoFiltro: string = 'ABIERTO';
  colorEstado = "warning";
 
- 
+ supervisor: boolean = true; 
 
   // tickets: MaeTickets[] = [
   //   {
@@ -84,21 +86,60 @@ export class HomePage implements OnInit {
   constructor(private state: ActivatedRoute,
     private route: Router,
     private ticketsService: TicketsService,
-    private modalCtrl: ModalController) {}
+    private usuarioService: UsuarioService,
+    private modalCtrl: ModalController) {
+
+      console.log('entra aqui despues q vence el token. CONSTRUCTOR')
+    }
 
     async ngOnInit() {
 
-    this.usuarioTickets = JSON.parse(this.state.snapshot.params.usuarioTicket);
+      console.log('entra aqui despues q vence el token. ngInit')
 
-    console.log(this.usuarioTickets)
-    console.log('Llama metodo al iniciar los tickets')
+      // this.state.queryParams.subscribe(async params => {
+      //   if (params && params.special) {
+      //     //store the temp in data
+      //     this.usuarioTickets = JSON.parse(params.special);  
+      //   }
+      // })
 
-    console.log('Esta habilitado? : ', this.habilitado)
-    await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro);
+      this.state.params.subscribe(params => {
 
-   // this.habilitado = true;
-    //await this.siguientes(this.usuarioTickets, this.estadoFiltro);
+       // console.log(params)
+        this.usuarioTickets = params['usuario']; 
+        //console.log(this.usuarioTickets)
+       });
 
+      //console.log(this.usuarioTickets)
+      // LLAMAR METODO QUE ME DICE QUE TIPO DE USUARIO ES
+      await this.ObtenerTipoUsuario(this.usuarioTickets);
+  
+  }
+
+  async ObtenerTipoUsuario(usuario: string){
+
+    (await this.usuarioService.obtenerTipoUsuario(usuario))
+    .subscribe(async tick => {
+
+        this.tipoUsuario = tick['data'];
+
+        this.supervisor = this.tipoUsuario === 'Supervisor' ? true : false;
+
+        await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro, true);
+
+        }, (errorObtenido) => {
+
+          console.log(errorObtenido);
+
+          if(errorObtenido.statusText === "Unauthorized"){
+
+          MensajeAdvertencia('La sesión finalizo, tienes que ingresar de nuevo.', 'Información');
+          this.route.navigate(['login']);
+
+          return;
+
+          }
+        })
   }
 
   async ObtenerTickets(usuario: string, estadoFiltro: string, pull: boolean = false, event?){
@@ -107,48 +148,49 @@ export class HomePage implements OnInit {
             .subscribe(tick => {
       
      console.log('registros data : ', tick['data'].length)
+    // console.log(tick['data'])
 
-     console.log(tick['data'])
-     this.tickets.push(...tick['data']);
-     
-      if(event){
+          if(tick['data'].length === 0){
 
-        event.target.complete();
+           console.log('data lengt = 0')
+           this.habilitado = false;
+           event.target.complete();
+           return;
+         }  
 
-        if(tick['data'].length === 0){
+         this.tickets.push(...tick['data']);
 
-          console.log('data lengt = 0')
-        // event.target.disabled = true;
-          this.habilitado = false;
-          //event.target.complete();
-          return;
-        }
-      }  
+         if(event){
+
+          event.target.complete();
+         }
+
     }, (errorObtenido) => {
 
       console.log(errorObtenido);
 
       if(errorObtenido.statusText === "Unauthorized"){
 
-        MensajeAdvertencia('La sesión finalizo, tienes que ingresar de nuevo.');
+        MensajeAdvertencia('La sesión finalizo, tienes que ingresar de nuevo.', 'Información');
         this.route.navigate(['login']);
 
+        return;
+
       }
-      
     })
 
   }
 
   async siguientes(event){
 
-    console.log('entra en siguientes ...')
+    //console.log('entra en siguientes ...')
 
     await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro, false, event);
   }
 
   async recargar(event){
 
-    console.log('recargando')
+    //console.log('recargando')
     
     await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro, true, event);
 
@@ -183,8 +225,9 @@ export class HomePage implements OnInit {
 
         if(errorObtenido.statusText === "Unauthorized"){
 
-          MensajeAdvertencia('La sesión finalizo, tienes que ingresar de nuevo.');
+          MensajeAdvertencia('La sesión finalizo, tienes que ingresar de nuevo.', 'Información');
           this.route.navigate(['login']);
+          //this.route.navigateByUrl('login');
   
         }
       });
@@ -192,18 +235,21 @@ export class HomePage implements OnInit {
 
   async LlamarModalDetalle(ticketRecibido: MaeTickets){
 
+    let supervisor = this.supervisor;
+    let usuarioSistema = this.usuarioTickets;
+
       const modal = await this.modalCtrl.create({
         component: TicketDetalleComponent,
-        componentProps: { ticketRecibido },
+        componentProps: { ticketRecibido, supervisor, usuarioSistema },
         cssClass: 'mi-componente-css'
     });
 
     modal.onDidDismiss().then(async () => {
 
-      console.log('entra modal desmise', this.habilitado)
+      //console.log('entra modal desmise', this.habilitado)
       this.tickets = [];
+      this.habilitado = true;
 
-     // await this.siguientes(this.usuarioTickets, this.estadoFiltro);
       await this.ObtenerTickets(this.usuarioTickets, this.estadoFiltro, true);
     });
 

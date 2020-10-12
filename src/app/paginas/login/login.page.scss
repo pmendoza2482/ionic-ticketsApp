@@ -1,7 +1,7 @@
 
 .contenedorLabel{
-    margin-top: 20%;
-    margin-bottom: 10%;
+    margin-top: 7%;
+    margin-bottom: 3%;
     width: 100%;
     display: grid;
     justify-content: center;
@@ -10,11 +10,19 @@
 .lbBienvenido{
     font-size: 1.6rem;
     color: #34495e;
+    margin: 0px;
+    margin-top: 12px;
+}
+
+.itemPadding{
+  margin: 0px;
+  padding: 0px;
 }
 
 .lbIniciar{
     font-size: 1.1rem;
     color: #34495e;
+    --margin: 0px;
 }
 
 .line-input {

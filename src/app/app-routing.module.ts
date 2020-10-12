@@ -14,6 +14,11 @@ const routes: Routes = [
     // canLoad: [UsuarioGuard]
   },
   {
+    path: 'home/:usuario',
+    loadChildren: () => import('./paginas/home/home.module').then( m => m.HomePageModule)
+    // canLoad: [UsuarioGuard]
+  },
+  {
     path: 'login',
     loadChildren: () => import('./paginas/login/login.module').then( m => m.LoginPageModule)
   }

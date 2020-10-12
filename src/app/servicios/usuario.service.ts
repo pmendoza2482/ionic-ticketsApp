@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 import { NavController } from '@ionic/angular';
 import { MensajeAdvertencia } from '../clasesComunes/validaciones';
-import { ResponseValidacion } from '../modelos/MaeTickets.models';
+import { ResponseValidacion, ResponseTickets, ResponseUsuario } from '../modelos/MaeTickets.models';
 
 
 const URL = environment.url;
@@ -36,11 +36,12 @@ export class UsuarioService {
             this.token = null;
             this.storege.clear();
             resolve(false);
-            MensajeAdvertencia(resp['message']);
+            MensajeAdvertencia(resp['message'], 'Validación');
 
             }
             if(resp['data']){
   
+              console.log('entra aqui despues q vence el token.')
               await this.guardarToken(resp['token']);
               resolve(true);
 
@@ -51,9 +52,21 @@ export class UsuarioService {
               this.storege.clear();
               resolve(false);
             }
+          }, (errorObtenido) => {
+
+              MensajeAdvertencia(errorObtenido, 'Error');
           });
       });
 
+    }
+
+    async obtenerTipoUsuario(usuario: string){
+
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.token
+      });
+
+      return this.http.get<ResponseUsuario>(URL + `Ticket/OtenerTipoUsuarioPorUsuario?usuario=${usuario}`, { headers });
     }
 
     async guardarToken(token: string){

@@ -5,6 +5,10 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { TicketsService } from 'src/app/servicios/tickets.service';
 import { MensajeAdvertencia } from 'src/app/clasesComunes/validaciones';
 
+
+//https://enappd.com/blog/implement-signature-pad-in-ionic-apps/145/
+
+
 @Component({
   selector: 'app-obtener-aceptacion',
   templateUrl: './obtener-aceptacion.component.html',
@@ -76,7 +80,7 @@ export class ObtenerAceptacionComponent implements OnInit {
     if(valido){
 
       loading.dismiss();
-      MensajeAdvertencia('Aceptación guardada.');
+      MensajeAdvertencia('Aceptación guardada.', 'Información');
       this.regresar();
 
     }else{

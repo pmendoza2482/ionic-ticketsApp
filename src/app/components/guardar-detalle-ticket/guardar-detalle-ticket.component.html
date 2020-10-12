@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar class="colorToolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="Cancelar()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Ticket # : {{ ticketSeleccionado }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="listaMargen"></div>
+
+  <ion-label class="etiquetas">Motivo del cambio</ion-label>
+  <div class="item-content-generalInformacion">
+    <ion-textarea rows=4 [(ngModel)]="motivoCambio" placeholder="Detalle..."></ion-textarea>
+  </div>
+
+  <ion-list style="margin-left: 3%; margin-right: 3%">
+    <ion-radio-group [(ngModel)]="radEstado">
+      <ion-list-header >
+        <ion-label>Al seleccionar una opción y presionar <strong>ACEPTAR</strong> cambiara el estado del ticket.</ion-label>
+      </ion-list-header> 
+    
+      <ion-item>
+        <ion-label>En Espera</ion-label>
+        <ion-radio name="radEstado" slot="start" value="EN ESPERA"></ion-radio>
+      </ion-item>
+  
+      <ion-item *ngIf="mostrarOpcionSi">
+        <ion-label>Abierto</ion-label>
+        <ion-radio name="radEstado" slot="start" value="ABIERTO"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Sin Asignar</ion-label>
+        <ion-radio name="radEstado" slot="start" value="SIN ASIGNAR"></ion-radio>
+      </ion-item>
+  
+      <ion-item *ngIf="supervisor">
+        <ion-label>Cerrado</ion-label>
+        <ion-radio name="radEstado" slot="start" value="CERRADO"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear"
+                (click)="Cancelar()">
+      Cancelar
+    </ion-button>
+
+    <ion-button slot="end" fill="clear"
+                (click)="GuardarInformacion()">
+       Aceptar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
+
+

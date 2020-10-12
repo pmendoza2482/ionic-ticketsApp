@@ -56,7 +56,7 @@ export class FotosComponent implements OnInit {
   async camara(numeroFoto: number){
 
     const options: CameraOptions = {
-      quality: 100,
+      quality: 60,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -70,7 +70,7 @@ export class FotosComponent implements OnInit {
   async libreria(numeroFoto: number){
 
     const options: CameraOptions = {
-      quality: 100,
+      quality: 60,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -95,7 +95,7 @@ export class FotosComponent implements OnInit {
       if(valido){
 
         //loading.dismiss();
-        MensajeAdvertencia('Aceptación guardada.');
+        MensajeAdvertencia('Imagen guardada.', 'Información');
         this.ObtenerImagenes();
   
       }else{
@@ -110,7 +110,7 @@ export class FotosComponent implements OnInit {
      }, (err) => {
       
       console.log(err);
-      MensajeAdvertencia('Ocurrio un error al cargar la foto.' + err);
+      MensajeAdvertencia('Ocurrio un error al cargar la foto.' + err, 'Error');
      });
 
   }

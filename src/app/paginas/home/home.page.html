@@ -11,17 +11,17 @@
     </ion-title>
   
     <ion-chip slot="end" color="dark">
-      <ion-label>{{usuarioTickets }}</ion-label>
+      <ion-label>{{ usuarioTickets }}</ion-label>
       <ion-icon name="person-outline"></ion-icon>
     </ion-chip>
   
   </ion-toolbar>
 
-   <ion-segment scrollable value="Todos" mode="md" class="colorSegmento" 
+   <ion-segment scrollable value="ABIERTO" mode="md" class="colorSegmento" 
                 color="light" 
                (ionChange)="SeleccionarOpcion($event)">
 
-    <ion-segment-button mode="md" value="Todos">
+    <ion-segment-button mode="md" value="Todos" *ngIf="supervisor">
       <ion-label>Todos</ion-label>
     </ion-segment-button>
 
@@ -33,11 +33,11 @@
       <ion-label>Abiertos</ion-label>
     </ion-segment-button>
 
-    <ion-segment-button mode="md" value="SIN ASIGNAR">
+    <ion-segment-button mode="md" value="SIN ASIGNAR" *ngIf="supervisor">
       <ion-label>Sin Asignar</ion-label>
     </ion-segment-button>
 
-    <ion-segment-button mode="md" value="CERRADO">
+    <ion-segment-button mode="md" value="CERRADO" *ngIf="supervisor">
       <ion-label text-capitalize>Cerrados</ion-label>
     </ion-segment-button>
 

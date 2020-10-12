@@ -47,10 +47,19 @@ export interface RequestTicket {
     estado?: string;
     longitud?: string;
     latitud?: string;
-  }
+    motivo?: string;
+    usuario?: string;
+    gusuario?: string;
+}
 
 
   export interface ResponseImagenes {
     message: string;
     data: MaeTickets;
+}
+
+export interface ResponseUsuario {
+  message: string;
+  data: string;
+  error?: string;  
 }

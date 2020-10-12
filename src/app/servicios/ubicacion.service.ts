@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UbicacionUsuario } from '../clasesComunes/ubicacionUsuario';
+import { MensajeAdvertencia } from '../clasesComunes/validaciones';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,9 @@ export class UbicacionService {
       });
 
      }).catch((error) => {
-       console.log('Error getting location', error);
+      MensajeAdvertencia(`Ocurrio un error, revise que la ubicación este habilitada`, 'Error');
+       //console.log('Error getting location', error);
      });
-
   }
 
 }

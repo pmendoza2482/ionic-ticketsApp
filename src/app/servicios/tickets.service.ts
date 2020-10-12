@@ -27,6 +27,8 @@ export class TicketsService {
 
   async obtenerTicketsPaginado(usuario: string, estadoFiltro: string, pull: boolean = false){
 
+    console.log('entra aqui despues q vence el token. obtener data servicio')
+
     if(pull){
       this.ticketPagina = 0;
     }
@@ -130,11 +132,11 @@ export class TicketsService {
       .then(data => {
 
         resolve(true);
-        console.log(data)
+        //console.log(data)
       }).catch(err => {
 
         resolve(false);
-        MensajeAdvertencia('Ocurrio un error:' + err);
+        MensajeAdvertencia('Ocurrio un error:' + err, 'Error');
       });
 
     });
