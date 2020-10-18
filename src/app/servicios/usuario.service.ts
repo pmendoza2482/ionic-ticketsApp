@@ -54,7 +54,8 @@ export class UsuarioService {
             }
           }, (errorObtenido) => {
 
-              MensajeAdvertencia(errorObtenido, 'Error');
+            console.log(JSON.stringify(errorObtenido))
+            MensajeAdvertencia(errorObtenido, "Error");
           });
       });
 

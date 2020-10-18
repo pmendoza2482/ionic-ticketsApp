@@ -18,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { GeneralClienteComponent } from './components/general-cliente/general-cliente.component';
 import { FotosComponent } from './components/fotos/fotos.component';
 import { ImageSanitizerPipe } from './pipes/image-sanitizer.pipe';
-import { FechasPersonalizadasPipe } from './pipes/fechas-personalizadas.pipe';
+//import { FechasPersonalizadasPipe } from './pipes/fechas-personalizadas.pipe';
 import { HistoricoComponent } from './components/historico/historico.component';
 import { PipesTicketsModule } from './pipes-tickets/pipes-tickets.module';
 import { TicketDetalleComponent } from './components/ticket-detalle/ticket-detalle.component';
@@ -27,7 +27,7 @@ import { ObtenerAceptacionComponent } from './components/obtener-aceptacion/obte
 import { GuardarDetalleTicketComponent } from './components/guardar-detalle-ticket/guardar-detalle-ticket.component';
 
 @NgModule({
-  declarations: [AppComponent, GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent, AceptacionComponent, ObtenerAceptacionComponent, GuardarDetalleTicketComponent, ImageSanitizerPipe, FechasPersonalizadasPipe],
+  declarations: [AppComponent, GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent, AceptacionComponent, ObtenerAceptacionComponent, GuardarDetalleTicketComponent, ImageSanitizerPipe],
   entryComponents: [GeneralClienteComponent, FotosComponent, HistoricoComponent, TicketDetalleComponent, AceptacionComponent, ObtenerAceptacionComponent, GuardarDetalleTicketComponent],
   imports: [
     PipesTicketsModule,

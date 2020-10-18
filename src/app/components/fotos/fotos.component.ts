@@ -36,11 +36,7 @@ export class FotosComponent implements OnInit {
 
     (await this.ticketsService.obtenerImagenes(this.tkt)).subscribe((tick)=> {
       
-      console.log(tick['data'])
       this.tickets = tick['data']
-
-      //this.imagen24 = this.tickets.ImagenDRW1;
-      // this.tempImagen.push(tick['data']);
 
     }, (errorObtenido) => {
       console.log(errorObtenido);

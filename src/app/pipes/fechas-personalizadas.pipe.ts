@@ -7,11 +7,11 @@ export class FechasPersonalizadasPipe implements PipeTransform {
 
   transform(value: Date): any {
     
-    let ano = value.getFullYear();
+   // let ano = value.getFullYear();
+    let ano = '2020';
     let mes = value.getMonth() + 1;
     let dia = value.getDate();
 
-    let diaTexto;
 
     if(mes === 0){ return dia + ' de Enero del ' + ano }
     if(mes === 1){ return dia + ' de Febrero del ' + ano }
